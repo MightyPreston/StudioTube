@@ -2,39 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StudioTube Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudioTube</title>
   <style>
     body {
       margin: 0;
       font-family: sans-serif;
       background: #111;
-      color: white;
+      color: #fff;
     }
+
     #videoList {
       display: flex;
       overflow-x: auto;
       padding: 10px;
       background: #222;
     }
+
     .videoItem {
       margin-right: 15px;
-      cursor: pointer;
-      white-space: nowrap;
-      padding: 8px 12px;
+      padding: 10px;
       background: #333;
-      border-radius: 4px;
+      border-radius: 5px;
+      cursor: pointer;
+      min-width: 200px;
       transition: background 0.3s;
     }
+
     .videoItem:hover {
       background: #444;
     }
+
+    .videoTitle {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    .videoMeta {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    .videoDesc {
+      font-size: 0.85em;
+      margin-top: 5px;
+      color: #ccc;
+    }
+
     #playerContainer {
-      position: relative;
       width: 100%;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 160px);
       background: black;
     }
+
     video {
       width: 100%;
       height: 100%;
@@ -42,7 +63,8 @@
   </style>
 </head>
 <body>
-  <div id="videoList"></div>
+  <h1 style="padding: 10px;">StudioTube</h1>
+  <div id="videoList">Loading flipnotes...</div>
   <div id="playerContainer">
     <video id="videoPlayer" controls></video>
   </div>
@@ -51,25 +73,33 @@
     const videoList = document.getElementById("videoList");
     const videoPlayer = document.getElementById("videoPlayer");
 
-    // List of MP4 files in the folder
-    const videos = [
-      "math.mp4",
-      "murder.mp4",
-      "rufus.mp4"
-      // Add more MP4 filenames here
-    ];
+    // Load flipnotes.json
+    fetch("flipnotes.json")
+      .then(res => res.json())
+      .then(flipnotes => {
+        videoList.innerHTML = ''; // Clear "Loading..." text
+        flipnotes.forEach(note => {
+          const item = document.createElement("div");
+          item.className = "videoItem";
+          item.onclick = () => {
+            videoPlayer.src = note.filename;
+            videoPlayer.play();
+          };
 
-    // Load videos into list
-    videos.forEach(video => {
-      const item = document.createElement("div");
-      item.className = "videoItem";
-      item.textContent = video;
-      item.onclick = () => {
-        videoPlayer.src = video;
-        videoPlayer.play();
-      };
-      videoList.appendChild(item);
-    });
+          item.innerHTML = `
+            <div class="videoTitle">${note.title}</div>
+            <div class="videoMeta">by ${note.author} | ${note.date}</div>
+            <div class="videoMeta">Tags: ${note.tags.join(', ')}</div>
+            <div class="videoDesc">${note.description}</div>
+          `;
+
+          videoList.appendChild(item);
+        });
+      })
+      .catch(err => {
+        videoList.innerHTML = "<p style='color: red;'>Failed to load flipnotes.json</p>";
+        console.error("Error loading flipnotes.json:", err);
+      });
   </script>
 </body>
 </html>
