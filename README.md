@@ -1,4 +1,4 @@
-# StudioTube
+![StudioTube Logo](./Assets/studiotube-logo.png)
 
 Welcome to the StudioTube GitHub! this and [StudioTube.org](https://www.studiotube.org) are the only offical sources of StudioTube, the other are fakes, dont trust them!
 
