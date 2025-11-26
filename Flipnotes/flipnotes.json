@@ -20,7 +20,15 @@
     "author": "MightyPreston",
     "filename": "rufus.mp4"
     "description": "the incident of rufus...",
-    "tags": ["dog", "stickman", "funny", "chaos"],
+    "tags": ["dog", "stickman", "funny"],
     "date": "11-24-2025"
+  },
+  {
+    "title": "Hi",
+    "author": "MightyPreston",
+    "filename": "Hi.mp4"
+    "description": "Stickman waving. first kinda smooth animation",
+    "tags": ["wave", "stickman", "funny", "hi"],
+    "date": "11-26-2025"
   }
 ]
