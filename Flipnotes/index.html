@@ -11,6 +11,10 @@
       background: #111;
       color: white;
     }
+    #logo {
+      padding: 10px;
+      text-align: center;
+    }
     #videoList {
       display: flex;
       overflow-x: auto;
@@ -32,7 +36,7 @@
     #playerContainer {
       position: relative;
       width: 100%;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 160px);
       background: black;
     }
     video {
@@ -42,35 +46,49 @@
   </style>
 </head>
 <body>
+
+  <!-- ✅ Proper place for logo -->
+  <div id="logo">
+    <img src="Assets/studiotube-logo.png" alt="StudioTube Logo" width="300" />
+  </div>
+
   <div id="videoList"></div>
+
   <div id="playerContainer">
-    <video id="videoPlayer" controls></video>
+    <video id="videoPlayer" controls>
+      <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <script>
     const videoList = document.getElementById("videoList");
     const videoPlayer = document.getElementById("videoPlayer");
-<img src="Assets/studiotube-logo.png" alt="StudioTube Logo" width="300">
-    // List of MP4 files in the folder
+
+    // ✅ Fixed the missing comma here
     const videos = [
       "math.mp4",
       "murder.mp4",
-      "rufus.mp4"
+      "rufus.mp4",
       "Hi.mp4"
-      // TODO: Add more MP4 filenames here
     ];
 
-    // Load videos into list
+    // Load video list
     videos.forEach(video => {
       const item = document.createElement("div");
       item.className = "videoItem";
-      item.textContent = video;
+      item.textContent = video.replace(".mp4", ""); // cleaner name
       item.onclick = () => {
         videoPlayer.src = video;
         videoPlayer.play();
       };
       videoList.appendChild(item);
     });
+
+    // Optional: Load first video automatically
+    if (videos.length > 0) {
+      videoPlayer.src = videos[0];
+    }
   </script>
 </body>
 </html>
