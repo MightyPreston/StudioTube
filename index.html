@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StudioTube</title>
+
   <style>
     body {
       font-family: sans-serif;
@@ -11,28 +12,70 @@
       background-color: #fefefe;
       color: #222;
     }
+
     h1 {
       margin-top: 2rem;
     }
+
     .container {
       margin: 2rem auto;
       max-width: 600px;
     }
+
     a {
       color: #007BFF;
       text-decoration: none;
     }
+
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <img src="Assets/studiotube-logo.png" alt="StudioTube Logo" width="300">
+
     <h1>🎬 Welcome to the StudioTube site</h1>
+
     <p>The only site for Flipnote Studio creations!</p>
-    <p>this and <a href="https://github.com/MightyPreston/StudioTube" target="_blank">The StudioTube GitHub</a> are the only offical sources of StudioTube, the other are fakes, dont trust them!</p>
+
+    <p>
+      this and
+      <a href="https://github.com/MightyPreston/StudioTube" target="_blank">
+        The StudioTube GitHub
+      </a>
+      are the only official sources of StudioTube.
+      The others are fakes — don’t trust them!
+    </p>
+
     <p>Created by MightyPreston</p>
-    <p>Sent your Flipnote Studio Flipnotes .ppm or converted .mp4 to contact@studiotube.org for them to get added</p>
-    <p>Check out the <a href="/Flipnotes">Flipnotes</a> to see all uploads!</p> 
+
+    <button onclick="showEmail()">Submit a Flipnote</button>
+
+    <p id="email" style="display:none; margin-top: 1rem; font-weight: bold;"></p>
+
+    <p>
+      Check out the <a href="/Flipnotes">Flipnotes</a> to see all uploads!
+    </p>
   </div>
+
+  <!-- ✅ SCRIPT GOES HERE (RIGHT BEFORE </body>) -->
+  <script>
+    function showEmail() {
+      const answer = prompt("Quick check: what is 2 + 3?");
+      if (answer === "5") {
+        document.getElementById("email").textContent =
+          "Send your Flipnote to: contact" + "@" + "studiotube.org";
+        document.getElementById("email").style.display = "block";
+      } else {
+        alert("Wrong answer.");
+      }
+    }
+  </script>
+
 </body>
-</html>
+</html
