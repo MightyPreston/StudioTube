@@ -61,33 +61,31 @@
   </div>
 
   <script>
-    const videoList = document.getElementById("videoList");
-    const videoPlayer = document.getElementById("videoPlayer");
+  const videoList = document.getElementById("videoList");
+  const videoPlayer = document.getElementById("videoPlayer");
 
-    // ✅ Fixed the missing comma here
-    const videos = [
-      "math.mp4",
-      "murder.mp4",
-      "rufus.mp4",
-      "Hi.mp4"
-    ];
+  fetch("flipnotes.json")
+    .then(res => res.json())
+    .then(videos => {
+      videos.forEach(video => {
+        const item = document.createElement("div");
+        item.className = "videoItem";
+        item.textContent = video.title;
+        item.onclick = () => {
+          videoPlayer.src = video.filename;
+          videoPlayer.play();
+        };
+        videoList.appendChild(item);
+      });
 
-    // Load video list
-    videos.forEach(video => {
-      const item = document.createElement("div");
-      item.className = "videoItem";
-      item.textContent = video.replace(".mp4", ""); // cleaner name
-      item.onclick = () => {
-        videoPlayer.src = video;
-        videoPlayer.play();
-      };
-      videoList.appendChild(item);
+      // Optional: Load first video
+      if (videos.length > 0) {
+        videoPlayer.src = videos[0].filename;
+      }
+    })
+    .catch(err => {
+      console.error("Failed to load flipnotes:", err);
     });
-
-    // Optional: Load first video automatically
-    if (videos.length > 0) {
-      videoPlayer.src = videos[0];
-    }
-  </script>
+</script>
 </body>
 </html>
